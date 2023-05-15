@@ -1,27 +1,34 @@
+import Nav from "@components/Nav";
+import Provider from "@components/Provider";
 import "@styles/globals.css";
 
 type Metadata = {
-  title: string,
-  description: string
-}
+  title: string;
+  description: string;
+};
 
-export const metadata : Metadata = {
+export const metadata: Metadata = {
   title: "prompt-sharer",
   description: "Discover and Share AI Prompts",
 };
 
 type Props = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 const RootLayout = ({ children }: Props) => {
   return (
     <html lang="en">
       <body>
-        <div className="main">
-          <div className="gradient" />
-        </div>
-        <main className="app">{children}</main>
+        <Provider>
+          <div className="main">
+            <div className="gradient" />
+          </div>
+          <main className="app">
+            <Nav />
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );
