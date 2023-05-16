@@ -32,9 +32,8 @@ const Nav = () => {
     fetchProviders();
   }, []);
 
-  console.log("PROVIDERS ", providers);
+  // console.log("PROVIDERS ", providers);
   // console.log("SESSION ", session);
-
   // console.log("toggle dropdown", toggleDropdown);
 
   return (

@@ -12,7 +12,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    async session({ session }: { session: any }) {
       const sessionUser = await User.findOne({ email: session.user?.email });
       session.user.id = sessionUser._id.toString();
       return session;
@@ -28,7 +28,7 @@ const handler = NextAuth({
           await User.create({
             email: profile?.email,
             username: profile?.name?.replace(" ", "").toLowerCase(),
-            image: profile?.image
+            image: profile?.image,
           });
         }
         return true;
