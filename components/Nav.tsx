@@ -33,6 +33,8 @@ const Nav = () => {
   }, []);
 
   console.log("PROVIDERS ", providers);
+  // console.log("SESSION ", session);
+
   // console.log("toggle dropdown", toggleDropdown);
 
   return (
@@ -63,7 +65,7 @@ const Nav = () => {
             </button>
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user.image!}
                 alt="profile pic"
                 width={37}
                 height={37}
@@ -79,7 +81,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black-btn"
+                  className="black_btn"
                 >
                   Sign In
                 </button>
@@ -93,11 +95,11 @@ const Nav = () => {
         {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/logo.svg"
+              src={session?.user.image!}
               alt="prompt logo"
               width={30}
               height={30}
-              className="object-contain"
+              className="object-contain rounded-full"
               onClick={() => setToggleDropdown((prev) => !prev)}
             />
             {toggleDropdown && (
@@ -136,7 +138,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black-btn"
+                  className="black_btn"
                 >
                   Sign In
                 </button>
