@@ -4,12 +4,6 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
 import { connectToDB } from "@utils/database";
 
-type ProfileProps = {
-  email: string;
-  name: string;
-  picture: string;
-};
-
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -19,22 +13,22 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }) {
-      const sessionUser = await User.findOne({ email: session.user.email });
+      const sessionUser = await User.findOne({ email: session.user?.email });
       session.user.id = sessionUser._id.toString();
       return session;
     },
-    async signIn({ profile }: {profile: ProfileProps}) {
+    async signIn({ profile }) {
       try {
         //serverless -> lambda ->
         await connectToDB();
         //check if a user already exists
-        const userExists = await User.findOne({ email: profile.email });
+        const userExists = await User.findOne({ email: profile?.email });
         // if not, create a new user
         if (!userExists) {
           await User.create({
-            email: profile.email,
-            username: profile.name.replace(" ", "").toLowerCase(),
-            image: profile.picture,
+            email: profile?.email,
+            username: profile?.name?.replace(" ", "").toLowerCase(),
+            image: profile?.image
           });
         }
         return true;
