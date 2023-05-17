@@ -15,8 +15,6 @@ type ProviderProps = {
 
 const Nav = () => {
   const { data: session } = useSession();
-  // console.log(session);
-
   const [providers, setProviders] = useState<ProviderProps[]>([]);
   const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
 
@@ -33,7 +31,7 @@ const Nav = () => {
   }, []);
 
   // console.log("PROVIDERS ", providers);
-  console.log("SESSION ", session);
+  // console.log("SESSION ", session);
   // console.log("toggle dropdown", toggleDropdown);
 
   return (
