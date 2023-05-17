@@ -23,9 +23,6 @@ const MyProfile = () => {
     if (session?.user.id) fetchPrompts();
   }, []);
 
-  console.log(prompts);
-  
-
   return (
     <Profile
       name="My"

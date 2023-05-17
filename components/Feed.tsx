@@ -38,7 +38,7 @@ const Feed = () => {
   const [prompts, setPrompts] = useState<PromptProps[]>([]);
 
   const handleSearchChange = (e: React.FormEvent) => {
-    console.log(e.target.value);
+    console.log("search change");
   };
 
   useEffect(() => {

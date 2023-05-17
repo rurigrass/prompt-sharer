@@ -33,13 +33,13 @@ const Profile = ({
 }: ProfileProps) => {
   return (
     <section className="w-full">
-      <h1>{name} Profile</h1>
+      <h1 className="head_text text-left">{name} Profile</h1>
       <div className="mt-16 prompt_layout">
         {data.map((prompt) => (
           <PromptCard
             key={prompt._id}
             prompt={prompt}
-            handleTagClick={handleTagClick}
+            handleTagClick={() => {}}
             handleEdit={undefined}
             handleDelete={undefined}
           />
