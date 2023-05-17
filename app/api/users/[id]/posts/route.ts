@@ -14,6 +14,6 @@ export const GET = async (request: any, { params }: { params: any }) => {
 
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
-    return new Response("Internal Server Error", { status: 500 });
+    return new Response("Failed to fetch prompts by user id", { status: 500 });
   }
 };

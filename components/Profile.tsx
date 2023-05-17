@@ -1,3 +1,5 @@
+import PromptCard from "./PromptCard";
+
 type CreatorProps = {
   email: string;
   image: string;
@@ -7,16 +9,17 @@ type CreatorProps = {
 };
 
 type PromptProps = {
-  _id: string;
   creator: CreatorProps;
   prompt: string;
   tag: string;
+  _id: string;
+  __v: number;
 };
 
 type ProfileProps = {
   name: string;
   desc: string;
-  data: PromptProps;
+  data: PromptProps[];
   handleEdit: () => void;
   handleDelete: () => void;
 };
@@ -28,7 +31,22 @@ const Profile = ({
   handleEdit,
   handleDelete,
 }: ProfileProps) => {
-  return <div>Profile</div>;
+  return (
+    <section className="w-full">
+      <h1>{name} Profile</h1>
+      <div className="mt-16 prompt_layout">
+        {data.map((prompt) => (
+          <PromptCard
+            key={prompt._id}
+            prompt={prompt}
+            handleTagClick={handleTagClick}
+            handleEdit={undefined}
+            handleDelete={undefined}
+          />
+        ))}
+      </div>
+    </section>
+  );
 };
 
 export default Profile;
