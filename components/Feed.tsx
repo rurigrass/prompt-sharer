@@ -2,8 +2,17 @@
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
+type CreatorProps = {
+  email: string;
+  image: string;
+  username: string;
+  __v: number;
+  _id: string;
+};
+
 type PromptProps = {
   _id: string;
+  creator: CreatorProps;
   prompt: string;
   tag: string;
 };
@@ -18,7 +27,7 @@ const PromptCardList = ({
   return (
     <div className="mt-16 prompt_layout">
       {data.map((prompt) => (
-        <PromptCard key={prompt._id} prompt={prompt} handleTagClick={handleTagClick}/>
+        <PromptCard key={prompt._id} prompt={prompt} handleTagClick={handleTagClick} handleEdit={undefined} handleDelete={undefined}/>
       ))}
     </div>
   );

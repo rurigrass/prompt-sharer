@@ -31,8 +31,12 @@ const PromptCard = ({
   handleDelete: any;
 }) => {
   const [copied, setCopied] = useState("");
-
-  console.log(prompt);
+  
+  const handleCopy = () => {
+    setCopied(prompt.prompt)
+    navigator.clipboard.writeText(prompt.prompt)
+    setTimeout(()=> setCopied(""), 3000)
+  }
 
   return (
     <div className="prompt_card">
@@ -56,9 +60,7 @@ const PromptCard = ({
         </div>
         <div
           className="copy_btn"
-          onClick={() => {
-            console.log("click");
-          }}
+          onClick={handleCopy}
         >
           <Image
             src={
@@ -72,6 +74,13 @@ const PromptCard = ({
           />
         </div>
       </div>
+      <p className="my-4 font-satoshi text-sm text-gray-700">{prompt.prompt}</p>
+      <p
+        className="font-inter text-sm blue_gradient cursor-pointer"
+        onClick={() => handleTagClick && handleTagClick(prompt.tag)}
+      >
+        #{prompt.tag}
+      </p>
     </div>
   );
 };
