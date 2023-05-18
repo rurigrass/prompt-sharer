@@ -3,15 +3,16 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
 type CreatorProps = {
+  _id: string;
+  __v: number;
   email: string;
   image: string;
   username: string;
-  __v: number;
-  _id: string;
 };
 
 type PromptProps = {
   _id: string;
+  __v: number;
   creator: CreatorProps;
   prompt: string;
   tag: string;
@@ -27,7 +28,11 @@ const PromptCardList = ({
   return (
     <div className="mt-16 prompt_layout">
       {data.map((prompt) => (
-        <PromptCard key={prompt._id} prompt={prompt} handleTagClick={handleTagClick} handleEdit={undefined} handleDelete={undefined}/>
+        <PromptCard
+          key={prompt._id}
+          prompt={prompt}
+          handleTagClick={handleTagClick}
+        />
       ))}
     </div>
   );
@@ -37,10 +42,6 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [prompts, setPrompts] = useState<PromptProps[]>([]);
 
-  const handleSearchChange = (e: React.FormEvent) => {
-    console.log("search change");
-  };
-
   useEffect(() => {
     const fetchPrompts = async () => {
       const response = await fetch("/api/prompt");
@@ -49,6 +50,10 @@ const Feed = () => {
     };
     fetchPrompts();
   }, []);
+
+  const handleSearchChange = (e: React.FormEvent) => {
+    console.log("search change");
+  };
 
   return (
     <section className="feed">

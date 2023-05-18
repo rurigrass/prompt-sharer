@@ -14,11 +14,18 @@ type CreatorProps = {
 };
 
 type PromptProps = {
+  _id: string;
+  __v: number;
   creator: CreatorProps;
   prompt: string;
   tag: string;
-  _id: string;
-  __v: number;
+};
+
+type PromptCardProps = {
+  prompt: PromptProps;
+  handleTagClick: any;
+  handleEdit?: (prompt: PromptProps) => void;
+  handleDelete?: (prompt: PromptProps) => void;
 };
 
 const PromptCard = ({
@@ -26,12 +33,7 @@ const PromptCard = ({
   handleTagClick,
   handleEdit,
   handleDelete,
-}: {
-  prompt: PromptProps;
-  handleTagClick: any;
-  handleEdit: (prompt: PromptProps) => void;
-  handleDelete: (prompt: PromptProps) => void;
-}) => {
+}: PromptCardProps) => {
   const { data: session } = useSession();
   const pathName = usePathname();
 
@@ -87,13 +89,13 @@ const PromptCard = ({
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient cursor-pointer"
-            onClick={(e) => handleEdit(prompt)}
+            onClick={(e) => handleEdit && handleEdit(prompt)}
           >
             Edit
           </p>
           <p
             className="font-inter text-sm orange_gradient cursor-pointer"
-            onClick={(e) => handleDelete(prompt)}
+            onClick={(e) => handleDelete && handleDelete(prompt)}
           >
             Delete
           </p>
