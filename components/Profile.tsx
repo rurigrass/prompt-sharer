@@ -44,7 +44,7 @@ const Profile = ({
           <PromptCard
             key={prompt._id}
             prompt={prompt}
-            handleTagClick={() => {}}
+            handleTagClick={() => {"clicked"}}
             handleEdit={() => handleEdit && handleEdit(prompt)}
             handleDelete={() => handleDelete && handleDelete(prompt)}
           />

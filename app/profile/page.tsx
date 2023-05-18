@@ -23,14 +23,16 @@ type PromptProps = {
 
 const MyProfile = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [prompts, setPrompts] = useState([]);
 
   const handleEdit = (prompt: PromptProps) => {
     console.log("EDIT ", prompt);
+    router.push(`/update-prompt?id=${prompt._id}`);
   };
 
   const handleDelete = (prompt: PromptProps) => {
-    console.log("DELETE ", prompt);
+    console.log("DELETE prompt", prompt);
   };
 
   useEffect(() => {

@@ -32,9 +32,9 @@ const PromptCard = ({
   handleEdit: (prompt: PromptProps) => void;
   handleDelete: (prompt: PromptProps) => void;
 }) => {
-  const {data: session} = useSession();
-  const pathName = usePathname()
-  
+  const { data: session } = useSession();
+  const pathName = usePathname();
+
   const [copied, setCopied] = useState("");
 
   const handleCopy = () => {
@@ -85,10 +85,16 @@ const PromptCard = ({
       </p>
       {session?.user?.id === prompt.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
-          <p className="font-inter text-sm green_gradient cursor-pointer">
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={(e) => handleEdit(prompt)}
+          >
             Edit
           </p>
-          <p className="font-inter text-sm orange_gradient cursor-pointer">
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={(e) => handleDelete(prompt)}
+          >
             Delete
           </p>
         </div>

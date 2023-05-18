@@ -10,7 +10,7 @@ type FormProps = {
   post: PostProps;
   setPost: (updatedPost: PostProps) => void;
   submitting: boolean;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.FormEvent) => void;
 };
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }: FormProps) => {
