@@ -20,8 +20,8 @@ type ProfileProps = {
   name: string;
   desc: string;
   data: PromptProps[];
-  handleEdit: () => void;
-  handleDelete: () => void;
+  handleEdit: (prompt: PromptProps) => void;
+  handleDelete: (prompt: PromptProps) => void;
 };
 
 const Profile = ({
@@ -31,8 +31,7 @@ const Profile = ({
   handleEdit,
   handleDelete,
 }: ProfileProps) => {
-
-// const handleEdit = (prompt:PromptProps) => {console.log(prompt)};
+  // const handleEdit = (prompt:PromptProps) => {console.log(prompt)};
 
   return (
     <section className="w-full">

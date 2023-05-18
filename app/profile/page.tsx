@@ -35,11 +35,11 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPrompts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+      const response = await fetch(`/api/users/${session?.user?.id}/posts`);
       const data = await response.json();
       setPrompts(data);
     };
-    if (session?.user.id) fetchPrompts();
+    if (session?.user?.id) fetchPrompts();
   }, []);
 
   return (

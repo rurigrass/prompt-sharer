@@ -13,10 +13,12 @@ type CreatorProps = {
   _id: string;
 };
 
-type PromptCardProps = {
+type PromptProps = {
   creator: CreatorProps;
   prompt: string;
   tag: string;
+  _id: string;
+  __v: number;
 };
 
 const PromptCard = ({
@@ -25,18 +27,21 @@ const PromptCard = ({
   handleEdit,
   handleDelete,
 }: {
-  prompt: PromptCardProps;
+  prompt: PromptProps;
   handleTagClick: any;
-  handleEdit: any;
-  handleDelete: any;
+  handleEdit: (prompt: PromptProps) => void;
+  handleDelete: (prompt: PromptProps) => void;
 }) => {
-  const [copied, setCopied] = useState("");
+  const {data: session} = useSession();
+  const pathName = usePathname()
   
+  const [copied, setCopied] = useState("");
+
   const handleCopy = () => {
-    setCopied(prompt.prompt)
-    navigator.clipboard.writeText(prompt.prompt)
-    setTimeout(()=> setCopied(""), 3000)
-  }
+    setCopied(prompt.prompt);
+    navigator.clipboard.writeText(prompt.prompt);
+    setTimeout(() => setCopied(""), 3000);
+  };
 
   return (
     <div className="prompt_card">
@@ -58,10 +63,7 @@ const PromptCard = ({
             </p>
           </div>
         </div>
-        <div
-          className="copy_btn"
-          onClick={handleCopy}
-        >
+        <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copied === prompt.prompt
@@ -81,6 +83,16 @@ const PromptCard = ({
       >
         #{prompt.tag}
       </p>
+      {session?.user?.id === prompt.creator._id && pathName === "/profile" && (
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p className="font-inter text-sm green_gradient cursor-pointer">
+            Edit
+          </p>
+          <p className="font-inter text-sm orange_gradient cursor-pointer">
+            Delete
+          </p>
+        </div>
+      )}
     </div>
   );
 };
