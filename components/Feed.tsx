@@ -16,7 +16,7 @@ type PromptProps = {
   creator: CreatorProps;
   prompt: string;
   tag: string;
-  createdAt: string
+  createdAt: string;
 };
 
 const PromptCardList = ({
@@ -44,9 +44,9 @@ const Feed = () => {
 
   // Search states
   const [searchText, setSearchText] = useState<string>("");
-  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | undefined>(
-    undefined
-  );
+  const [searchTimeout, setSearchTimeout] = useState<
+    NodeJS.Timeout | undefined
+  >(undefined);
   const [searchedResults, setSearchedResults] = useState<PromptProps[]>([]);
 
   useEffect(() => {
@@ -69,15 +69,21 @@ const Feed = () => {
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearTimeout(searchTimeout);    
+    clearTimeout(searchTimeout);
     setSearchText(e.target.value);
     // debounce method
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = filterPrompts(e.target.value);        
+        const searchResult = filterPrompts(e.target.value);
         setSearchedResults(searchResult);
       }, 500)
     );
+  };
+
+  const handleTagClick = (tagName: string) => {
+    setSearchText(tagName);
+    const searchResult = filterPrompts(tagName);
+    setSearchedResults(searchResult);
   };
 
   // console.log("PROMPTS", prompts);
@@ -98,7 +104,15 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={prompts} handleTagClick={() => {}} />
+      {/* All Prompts */}
+      {searchText ? (
+        <PromptCardList
+          data={searchedResults}
+          handleTagClick={handleTagClick}
+        />
+      ) : (
+        <PromptCardList data={prompts} handleTagClick={handleTagClick} />
+      )}
     </section>
   );
 };

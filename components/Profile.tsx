@@ -20,8 +20,8 @@ type ProfileProps = {
   name: string;
   desc: string;
   data: PromptProps[];
-  handleEdit: (prompt: PromptProps) => void;
-  handleDelete: (prompt: PromptProps) => void;
+  handleEdit?: (prompt: PromptProps) => void;
+  handleDelete?: (prompt: PromptProps) => void;
 };
 
 const Profile = ({

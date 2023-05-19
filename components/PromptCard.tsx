@@ -34,6 +34,7 @@ const PromptCard = ({
   handleEdit,
   handleDelete,
 }: PromptCardProps) => {
+  const router = useRouter();
   const { data: session } = useSession();
   const pathName = usePathname();
 
@@ -45,12 +46,23 @@ const PromptCard = ({
     setTimeout(() => setCopied(""), 3000);
   };
 
+  const handleProfileClick = () => {
+    if (prompt.creator._id === session?.user?.id)
+      return router.push("/profile");
+    router.push(
+      `/profile/${prompt.creator._id}?name=${prompt.creator.username}`
+    );
+  };
+
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+          onClick={handleProfileClick}
+        >
           <Image
-            src={prompt.creator.image}
+            src={prompt.creator.image ? prompt.creator.image : "/assets/images/logo.svg"}
             alt="user_image"
             width={40}
             height={40}
